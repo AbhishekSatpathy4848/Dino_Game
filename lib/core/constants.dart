@@ -16,3 +16,5 @@ int getSprintDinoSpritesNumber() =>
     sprintDinoSprites[1] - sprintDinoSprites.first;
 
 const baseVelocity = 10.0;
+const groundHeight = 32.0;
+const dinoSpritePadding = 12;
