@@ -13,11 +13,11 @@ class DinoGame extends FlameGame with TapDetector {
 
   Future<ParallaxComponent> getParallaxComponent() async {
     final parallaxImages = [
-      await loadParallaxImage('plx-1.png'),
-      await loadParallaxImage('plx-2.png'),
-      await loadParallaxImage('plx-3.png'),
-      await loadParallaxImage('plx-4.png'),
-      await loadParallaxImage('plx-5.png'),
+      await loadParallaxImage('parallax/plx-1.png'),
+      await loadParallaxImage('parallax/plx-2.png'),
+      await loadParallaxImage('parallax/plx-3.png'),
+      await loadParallaxImage('parallax/plx-4.png'),
+      await loadParallaxImage('parallax/plx-5.png'),
       await loadParallaxImage('ground_dino.png', fill: LayerFill.none),
     ];
 
@@ -50,9 +50,7 @@ class DinoGame extends FlameGame with TapDetector {
 
   @override
   void onTap() {
-    print("hey");
-    dino.jump();
-    // dino.spee
+    dino.jump(); 
     super.onTap();
   }
 }
