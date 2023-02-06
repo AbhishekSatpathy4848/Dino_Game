@@ -18,3 +18,5 @@ int getSprintDinoSpritesNumber() =>
 const baseVelocity = 10.0;
 const groundHeight = 32.0;
 const dinoSpritePadding = 12;
+
+const kOverlaysPlayPauseButton = "PlayPauseButton";

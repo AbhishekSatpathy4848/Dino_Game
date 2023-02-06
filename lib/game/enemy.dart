@@ -43,7 +43,7 @@ Map<EnemyType, EnemyData> enemyMap = {
   ),
 };
 
-class Enemy extends SpriteAnimationComponent{
+class Enemy extends SpriteAnimationComponent {
   double xMax;
   EnemyType enemyType;
 
@@ -63,13 +63,15 @@ class Enemy extends SpriteAnimationComponent{
 
   @override
   void onGameResize(Vector2 size) {
-    height = size[1] * 0.2;
-    width = size[1] * 0.2;
-    x = size[0];
-    y = size[1] -
-        groundHeight -
-        height +
-        enemyMap[EnemyType.angryPig]!.enemySpritePadding;
+    if (height == 0.0) { 
+      height = size.y * 0.2;
+      width = size.y * 0.2;
+      x = size.x;
+      y = size.y -
+          groundHeight -
+          height +
+          enemyMap[EnemyType.angryPig]!.enemySpritePadding;
+    }
     super.onGameResize(size);
   }
 

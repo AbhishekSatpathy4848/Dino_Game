@@ -34,7 +34,6 @@ class DinoGame extends FlameGame with TapDetector {
 
   @override
   Future<void> onLoad() async {
-
     parallaxComponent = await getParallaxComponent();
     add(parallaxComponent);
 
@@ -42,8 +41,9 @@ class DinoGame extends FlameGame with TapDetector {
     scoreTextComponent.x = size[0] * 0.5 - scoreTextComponent.width * 0.5;
     add(scoreTextComponent);
 
+    overlays.add(kOverlaysPlayPauseButton);
+
     dino = Dino();
-    
     add(dino);
 
     Enemy enemyAngryPig = Enemy(enemyType: EnemyType.angryPig, xMax: size[0]);
@@ -64,7 +64,9 @@ class DinoGame extends FlameGame with TapDetector {
     score = score + (60 * dt).toInt();
     scoreTextComponent.text = score.toString();
 
-    
+    // parallaxComponent.parallax!.baseVelocity = Vector2(
+    //     baseVelocity + (score / 100), 0);
+
 
     super.update(dt);
   }
