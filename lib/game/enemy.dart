@@ -79,7 +79,14 @@ class Enemy extends SpriteAnimationComponent {
   @override
   void update(double dt) {
     x += enemyMap[enemyType]!.speed[0] * dt;
-    if (x <= -enemyMap[enemyType]!.textureSize[0]) x = xMax;
+    if (x <= -enemyMap[enemyType]!.textureSize[0]) {
+      remove(this);
+    }
     super.update(dt);
+  }
+
+  @override
+  void remove(Component component) {
+    component.removeFromParent();
   }
 }
