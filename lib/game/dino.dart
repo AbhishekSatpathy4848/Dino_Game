@@ -4,6 +4,8 @@ import 'package:flame/components.dart' hide Timer;
 import 'package:flame/flame.dart';
 import 'dart:async';
 
+import 'package:flutter/services.dart';
+
 class Dino extends SpriteAnimationComponent {
   late SpriteAnimation idleDinoAnimation;
   late SpriteAnimation runningDinoAnimation;
@@ -15,6 +17,7 @@ class Dino extends SpriteAnimationComponent {
   double dinoSpeedY = 0.0;
   double gravity = 0.0;
   late Timer hitTimer;
+  bool isHit = false;
 
   Dino() : super() {
     Flame.images.load('DinoSprites-tard.png').then((spriteSheet) {
@@ -123,10 +126,15 @@ class Dino extends SpriteAnimationComponent {
   }
 
   void hit() {
-    hitTimer = Timer(const Duration(milliseconds: 800), () {
-      run();
-    });
-    animation = hitDinoAnimation;
+    if (!isHit) {
+      hitTimer = Timer(const Duration(milliseconds: 800), () {
+        run();
+        isHit = false;
+      });
+      animation = hitDinoAnimation;
+      isHit = true;
+      HapticFeedback.mediumImpact();
+    }
   }
 
   void sprint() {
