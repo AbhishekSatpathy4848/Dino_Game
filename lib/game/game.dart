@@ -46,10 +46,10 @@ class DinoGame extends FlameGame with TapDetector {
     dino = Dino();
     add(dino);
 
-    Enemy enemyAngryPig = Enemy(enemyType: EnemyType.angryPig, xMax: size[0]);
+    Enemy enemyAngryPig = Enemy(EnemyType.angryPig);
     add(enemyAngryPig);
 
-    Enemy enemyBat = Enemy(enemyType: EnemyType.bat, xMax: size[0]);
+    Enemy enemyBat = Enemy(EnemyType.bat);
     add(enemyBat);
   }
 
@@ -64,9 +64,14 @@ class DinoGame extends FlameGame with TapDetector {
     score = score + (60 * dt).toInt();
     scoreTextComponent.text = score.toString();
 
+    descendants().forEach((element) {
+      if (element is Enemy) {
+        dino.distance(element) < size.y * 0.15 ? dino.hit() : null;
+      }
+    });
+
     // parallaxComponent.parallax!.baseVelocity = Vector2(
     //     baseVelocity + (score / 100), 0);
-
 
     super.update(dt);
   }

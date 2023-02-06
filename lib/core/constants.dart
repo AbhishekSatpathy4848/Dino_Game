@@ -20,3 +20,6 @@ const groundHeight = 32.0;
 const dinoSpritePadding = 12;
 
 const kOverlaysPlayPauseButton = "PlayPauseButton";
+
+const size50 = 50.0;
+  

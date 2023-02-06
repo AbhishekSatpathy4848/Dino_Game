@@ -44,10 +44,10 @@ Map<EnemyType, EnemyData> enemyMap = {
 };
 
 class Enemy extends SpriteAnimationComponent {
-  double xMax;
   EnemyType enemyType;
+  late double xMax;
 
-  Enemy({required this.enemyType, required this.xMax}) : super() {
+  Enemy(this.enemyType) : super() {
     SpriteAnimationData spriteAnimationData = SpriteAnimationData.sequenced(
       amount: enemyMap[enemyType]!.totalSprites,
       stepTime: enemyMap[enemyType]!.spriteFrameDurations,
@@ -71,6 +71,7 @@ class Enemy extends SpriteAnimationComponent {
           groundHeight -
           height +
           enemyMap[EnemyType.angryPig]!.enemySpritePadding;
+      xMax = size.x;
     }
     super.onGameResize(size);
   }

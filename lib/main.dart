@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
           return GestureDetector(
             child: Icon(
               isPaused ? Icons.play_arrow_rounded : Icons.pause_rounded,
-              size: 50,
+              size: size50,
               color: Colors.white,
             ),
             onTap: () {
