@@ -1,10 +1,6 @@
 import 'package:dino_game/core/constants.dart';
 import 'package:flame/components.dart';
-import 'package:flame/game.dart';
-import 'package:flame/image_composition.dart';
 import 'package:flame/flame.dart';
-import 'package:flame/sprite.dart';
-import 'package:flutter/material.dart';
 
 class Dino extends SpriteAnimationComponent {
   late SpriteAnimation idleDinoAnimation;
@@ -12,11 +8,11 @@ class Dino extends SpriteAnimationComponent {
   late SpriteAnimation kickDinoAnimation;
   late SpriteAnimation hitDinoAnimation;
   late SpriteAnimation sprintDinoAnimation;
+  late double yMax;
   double dinoSpeedY = 0.0;
   double gravity = 0.0;
-  double yMax;
 
-  Dino({required this.yMax}) {
+  Dino() : super() {
     Flame.images.load('DinoSprites-tard.png').then((spriteSheet) {
       SpriteAnimationData idleDinoAnimationData = SpriteAnimationData.range(
           amount: totalDinoSpritesNumber,
@@ -80,9 +76,19 @@ class Dino extends SpriteAnimationComponent {
   }
 
   @override
+  void onGameResize(Vector2 size) {
+    height = size[1] * 0.2;
+    width = size[1] * 0.2;
+    x = size[0] * 0.1;
+    y = size[1] - groundHeight - height + dinoSpritePadding;
+    yMax = y;
+    super.onGameResize(size);
+  }
+
+  @override
   void update(double dt) {
     dinoSpeedY = dinoSpeedY + gravity * dt;
-    y = y + dinoSpeedY * 5 * dt;
+    y = y + dinoSpeedY * 3 * dt;
     if (onGround()) {
       dinoSpeedY = 0;
       gravity = 0;
@@ -122,7 +128,7 @@ class Dino extends SpriteAnimationComponent {
   void jump() {
     if (onGround()) {
       dinoSpeedY = -300.0;
-      gravity = 1200.0;
+      gravity = 800.0;
     }
   }
 }

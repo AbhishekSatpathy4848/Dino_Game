@@ -62,6 +62,18 @@ class Enemy extends SpriteAnimationComponent{
   }
 
   @override
+  void onGameResize(Vector2 size) {
+    height = size[1] * 0.2;
+    width = size[1] * 0.2;
+    x = size[0];
+    y = size[1] -
+        groundHeight -
+        height +
+        enemyMap[EnemyType.angryPig]!.enemySpritePadding;
+    super.onGameResize(size);
+  }
+
+  @override
   void update(double dt) {
     x += enemyMap[enemyType]!.speed[0] * dt;
     if (x <= -enemyMap[enemyType]!.textureSize[0]) x = xMax;
