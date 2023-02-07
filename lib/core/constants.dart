@@ -19,7 +19,8 @@ const baseVelocity = 10.0;
 const groundHeight = 32.0;
 const dinoSpritePadding = 12;
 
-const kOverlaysPlayPauseButton = "PlayPauseButton";
+const kTopBar = "topBar";
+const kHealthHeartsNumber = 5;
 
+const size30 = 30.0;
 const size50 = 50.0;
-  
