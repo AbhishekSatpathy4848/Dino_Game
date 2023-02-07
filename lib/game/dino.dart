@@ -4,7 +4,7 @@ import 'package:flame/components.dart' hide Timer;
 import 'package:flame/flame.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 
 class Dino extends SpriteAnimationComponent {
   late SpriteAnimation idleDinoAnimation;
@@ -18,6 +18,7 @@ class Dino extends SpriteAnimationComponent {
   double gravity = 0.0;
   late Timer hitTimer;
   bool isHit = false;
+  ValueNotifier<int> dinoHealth = ValueNotifier(kHealthHeartsNumber);
 
   Dino() : super() {
     Flame.images.load('DinoSprites-tard.png').then((spriteSheet) {
@@ -125,15 +126,20 @@ class Dino extends SpriteAnimationComponent {
     animation = kickDinoAnimation;
   }
 
-  void hit() {
+  void hit() async {
     if (!isHit) {
       hitTimer = Timer(const Duration(milliseconds: 800), () {
         run();
         isHit = false;
       });
       animation = hitDinoAnimation;
+      dinoHealth.value--;
       isHit = true;
-      HapticFeedback.mediumImpact();
+      // Clipboard.setData(const ClipboardData());
+      // HapticFeedback.heavyImpact();
+      // if(await Vibration.hasVibrator() ?? false) {
+      // Vibration.vibrate(duration: 1000);
+      // }
     }
   }
 

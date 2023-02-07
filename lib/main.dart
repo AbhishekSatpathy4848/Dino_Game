@@ -34,22 +34,47 @@ class _MyAppState extends State<MyApp> {
         body: GameWidget(
       game: _dinoGame,
       overlayBuilderMap: {
-        kOverlaysPlayPauseButton: (context, DinoGame game) {
-          return GestureDetector(
-            child: Icon(
-              isPaused ? Icons.play_arrow_rounded : Icons.pause_rounded,
-              size: size50,
-              color: Colors.white,
+        kTopBar: (context, DinoGame game) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 6.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: playPauseGame(game),
+                  child: Icon(
+                    isPaused ? Icons.play_arrow_rounded : Icons.pause_rounded,
+                    size: size50,
+                    color: Colors.white,
+                  ),
+                ),
+                ValueListenableBuilder(
+                  valueListenable: game.dino.dinoHealth,
+                  builder: ((context, value, child) {
+                    return Row(
+                        children: List.generate(kHealthHeartsNumber, (index) {
+                      return Icon(
+                        size: size30,
+                        Icons.favorite,
+                        color: game.dino.dinoHealth.value > index
+                            ? Colors.red
+                            : Colors.grey,
+                      );
+                    }));
+                  }),
+                )
+              ],
             ),
-            onTap: () {
-              isPaused ? game.resumeEngine() : game.pauseEngine();
-              setState(() {
-                isPaused = !isPaused;
-              });
-            },
           );
-        }
+        },
       },
     ));
+  }
+
+  playPauseGame(DinoGame game) {
+    isPaused ? game.resumeEngine() : game.pauseEngine();
+    setState(() {
+      isPaused = !isPaused;
+    });
   }
 }
