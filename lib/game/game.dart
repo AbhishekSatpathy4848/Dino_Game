@@ -1,6 +1,7 @@
 import 'package:dino_game/core/constants.dart';
 import 'package:dino_game/game/dino.dart';
 import 'package:dino_game/game/enemy.dart';
+import 'package:dino_game/game/enemy_handler.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
@@ -9,6 +10,7 @@ import 'package:flame/parallax.dart';
 class DinoGame extends FlameGame with TapDetector {
   late Dino dino;
   late ParallaxComponent parallaxComponent;
+  late EnemyHandler enemyHandler;
   int score = 0;
   late TextComponent scoreTextComponent;
 
@@ -39,18 +41,21 @@ class DinoGame extends FlameGame with TapDetector {
 
     scoreTextComponent = TextComponent(text: score.toString());
     scoreTextComponent.x = size[0] * 0.5 - scoreTextComponent.width * 0.5;
+    scoreTextComponent.y = 8;
     add(scoreTextComponent);
 
-    overlays.add(kOverlaysPlayPauseButton);
+    overlays.add(kTopBar);
 
     dino = Dino();
     add(dino);
 
-    Enemy enemyAngryPig = Enemy(EnemyType.angryPig);
-    add(enemyAngryPig);
+    // Enemy enemyAngryPig = Enemy(EnemyType.angryPig);
+    // add(enemyAngryPig);
+    enemyHandler = EnemyHandler();
+    add(enemyHandler);
 
-    Enemy enemyBat = Enemy(EnemyType.bat);
-    add(enemyBat);
+    // Enemy enemyBat = Enemy(EnemyType.bat);
+    // add(enemyBat);
   }
 
   @override
